@@ -37,5 +37,21 @@ public class PartidoBlackjack extends Partido{
         return "Ya tienes una mano de 5 cartas";
     }
     
+    public void modificarPuntaje(){
+        int puntaje1=0;
+        for(Carta a : super.getMyJugada1().getMyCartas()){
+            try{
+                puntaje1+=Integer.parseInt(a.getValor());
+            }catch(NumberFormatException e){
+                if(a.getValor().equalsIgnoreCase("A")){
+                    if(super.getMyJugada1().getPuntaje()>10){
+                        puntaje1+=1;
+                    }else{
+                        puntaje1+=11;
+                    }
+                }
+            }
+        }
+    }
     
 }

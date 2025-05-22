@@ -9,7 +9,7 @@ public class Crupier extends Persona{
         super(nombre, cedula, edad, telefono);
     }
     
-    public boolean pedirCarta(int puntaje, int turnos){
+    public boolean pedirCarta(int puntaje){
         if(puntaje>=17){
             return false;
         }

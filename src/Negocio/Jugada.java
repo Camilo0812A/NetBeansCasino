@@ -50,6 +50,14 @@ public class Jugada {
         this.myCartas = myCartas;
     }
 
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
     
 
     

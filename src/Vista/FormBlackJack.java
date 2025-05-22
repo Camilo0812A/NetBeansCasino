@@ -168,6 +168,11 @@ public class FormBlackJack extends javax.swing.JFrame {
         });
 
         btnStop2.setText("Stop");
+        btnStop2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStop2ActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setText("Nuevo");
 
@@ -378,6 +383,14 @@ public class FormBlackJack extends javax.swing.JFrame {
             Ventana.imp(salida, "Sistema");
         }
     }//GEN-LAST:event_btnOtraCarta2ActionPerformed
+
+    private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
+        if(myCasino.plantarJugador1()){
+            myCasino.mostrarCartas();
+            
+        }
+        
+    }//GEN-LAST:event_btnStop2ActionPerformed
 
     void mostrarInfo(String info){
         String[] infor=new String[6];
