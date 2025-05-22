@@ -20,6 +20,22 @@ public class Jugador extends Persona {
         return salida;
     }
 
+    public int getCantidadCambios() {
+        return cantidadCambios;
+    }
+
+    public void setCantidadCambios(int cantidadCambios) {
+        this.cantidadCambios = cantidadCambios;
+    }
+
+    public Carta[] getMyCartas() {
+        return myCartas;
+    }
+
+    public void setMyCartas(Carta[] myCartas) {
+        this.myCartas = myCartas;
+    }
+
     public int getSaldo() {
         return saldo;
     }
