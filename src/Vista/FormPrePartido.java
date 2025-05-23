@@ -168,7 +168,7 @@ public class FormPrePartido extends javax.swing.JFrame {
     }
     
     if(boolJuegaCasa.isSelected()){
-        txtJugador2.setText(myCasino.mostrarCrupierEncargado());
+        txtJugador2.setText(myCasino.mostrarCedulaCrupierE());
         txtApuesta2.setText(txtApuesta1.getText());
     }
     
