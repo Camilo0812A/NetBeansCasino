@@ -294,7 +294,7 @@ public class FormPrePartido extends javax.swing.JFrame {
     private void boolJuegaCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boolJuegaCasaActionPerformed
         if (boolJuegaCasa.isSelected()){
             txtJugador2.setEnabled(false);
-            txtJugador2.setText(myCasino.mostrarCrupierEncargado());
+            txtJugador2.setText(myCasino.mostrarCedulaCrupierE());
             txtApuesta2.setEnabled(false);
             txtApuesta2.setText("Iguala");
             juegaCasa = true;

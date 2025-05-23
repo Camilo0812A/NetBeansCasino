@@ -29,8 +29,9 @@ public class FormBlackJack extends javax.swing.JFrame {
         txtApuesta2.setEnabled(false);
         txtNombre1.setEnabled(false);
         txtNombre2.setEnabled(false);
+        btnOtraCarta2.setEnabled(false);
+        btnStop2.setEnabled(false);
         this.myCasino=myCasino;
-        
         SetImageLabel(lblCarta1, "src/images/AsDeCorazones.png");
         SetImageLabel(lblCarta2, "src/images/AsDeDiamantes.png");
         SetImageLabel(lblCarta3, "src/images/AsDePicas.png");
@@ -44,6 +45,11 @@ public class FormBlackJack extends javax.swing.JFrame {
         manoJ1 = new  JLabel[]{this.lblCarta1, this.lblCarta2, this.lblCarta3, this.lblCarta4, this.lblCarta5};
         manoJ2 = new  JLabel[]{this.lblCarta6, this.lblCarta7, this.lblCarta8, this.lblCarta9, this.lblCarta10};
         mostrarCartas(myCasino.mostrarCartas());
+        if(myCasino.esBlackjack().equalsIgnoreCase("El jugador 1 ha ganado con un blackjack")||myCasino.esBlackjack().equalsIgnoreCase("El jugador 2 ha ganado con un blackjack")){
+            Ventana.imp(myCasino.finalizarPartido(), "Sistema");
+            this.btnOtraCarta1.setEnabled(false);
+            this.btnStop1.setEnabled(false);
+        }
     }
     
     
@@ -84,9 +90,9 @@ public class FormBlackJack extends javax.swing.JFrame {
         lblCarta5 = new javax.swing.JLabel();
         lblCarta3 = new javax.swing.JLabel();
         btnOtraCarta2 = new javax.swing.JButton();
-        btnStop = new javax.swing.JButton();
-        btnOtraCarta1 = new javax.swing.JButton();
         btnStop2 = new javax.swing.JButton();
+        btnOtraCarta1 = new javax.swing.JButton();
+        btnStop1 = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -158,7 +164,7 @@ public class FormBlackJack extends javax.swing.JFrame {
             }
         });
 
-        btnStop.setText("Stop");
+        btnStop2.setText("Stop");
 
         btnOtraCarta1.setText("Otra Carta");
         btnOtraCarta1.addActionListener(new java.awt.event.ActionListener() {
@@ -167,10 +173,10 @@ public class FormBlackJack extends javax.swing.JFrame {
             }
         });
 
-        btnStop2.setText("Stop");
-        btnStop2.addActionListener(new java.awt.event.ActionListener() {
+        btnStop1.setText("Stop");
+        btnStop1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStop2ActionPerformed(evt);
+                btnStop1ActionPerformed(evt);
             }
         });
 
@@ -246,7 +252,7 @@ public class FormBlackJack extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(btnOtraCarta1)
                                         .addGap(58, 58, 58)
-                                        .addComponent(btnStop2)))
+                                        .addComponent(btnStop1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblCarta5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
@@ -276,7 +282,7 @@ public class FormBlackJack extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnOtraCarta2)
                                 .addGap(78, 78, 78)
-                                .addComponent(btnStop)))))
+                                .addComponent(btnStop2)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -333,10 +339,10 @@ public class FormBlackJack extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnOtraCarta1)
-                        .addComponent(btnStop2))
+                        .addComponent(btnStop1))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnOtraCarta2)
-                        .addComponent(btnStop)))
+                        .addComponent(btnStop2)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
@@ -365,15 +371,25 @@ public class FormBlackJack extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApuesta1ActionPerformed
 
     private void btnAnotherGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnotherGameActionPerformed
-        
-        //formElJu.setVisible(true);
-        //this.dispose();
+        FormPrePartido volver = new FormPrePartido(myCasino);
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAnotherGameActionPerformed
 
     private void btnOtraCarta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtraCarta1ActionPerformed
         String salida=myCasino.pedirCartaBlackjack("1");
+        mostrarCartas(myCasino.mostrarCartas());
         if(salida.equalsIgnoreCase("Ya tienes una mano de 5 cartas")){
             Ventana.imp(salida, "Sistema");
+            return;
+        }
+        if(salida.equalsIgnoreCase("Has obtenido 21")){
+            Ventana.imp(salida, "Sistema");
+            this.btnStop1ActionPerformed(evt);
+        }
+        if(salida.equalsIgnoreCase("Te has pasado de 21")){
+            Ventana.imp(salida, "Sistema");
+            this.btnStop1ActionPerformed(evt);
         }
     }//GEN-LAST:event_btnOtraCarta1ActionPerformed
 
@@ -384,13 +400,16 @@ public class FormBlackJack extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOtraCarta2ActionPerformed
 
-    private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
+    private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
+        this.btnOtraCarta1.setEnabled(false);
+        this.btnStop1.setEnabled(false);
         if(myCasino.plantarJugador1()){
-            myCasino.mostrarCartas();
-            
+            Ventana.imp(myCasino.finalizarPartido(), "Sistema");
+            return;
         }
-        
-    }//GEN-LAST:event_btnStop2ActionPerformed
+        this.btnOtraCarta2.setEnabled(true);
+        this.btnStop2.setEnabled(true);
+    }//GEN-LAST:event_btnStop1ActionPerformed
 
     void mostrarInfo(String info){
         String[] infor=new String[6];
@@ -413,9 +432,10 @@ public class FormBlackJack extends javax.swing.JFrame {
             }
             i++;
         }
+        i=0;
         for(JLabel e:manoJ2){
             if(!infor[i].equalsIgnoreCase("")){
-                SetImageLabel(manoJ2[i-5], infor[i]);
+                SetImageLabel(manoJ2[i], infor[i]);
             }
             i++;
         }
@@ -432,7 +452,7 @@ public class FormBlackJack extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnOtraCarta1;
     private javax.swing.JButton btnOtraCarta2;
-    private javax.swing.JButton btnStop;
+    private javax.swing.JButton btnStop1;
     private javax.swing.JButton btnStop2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

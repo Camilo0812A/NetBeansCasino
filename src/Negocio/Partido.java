@@ -5,9 +5,10 @@ public abstract class Partido {
     private Jugada myJugada1;
     private Jugada myJugada2;
     private boolean juegaLaCasa;
-    private String ganador;
-    private String perdedor;
+    private Persona ganador;
+    private Persona perdedor;
     private int cuentasParaLaCasa;
+    private String estado="Vigente";
 
     public Partido(Jugada jugada1, Jugada jugada2, boolean juegaCasa) {
         this.myJugada1 = jugada1;
@@ -38,6 +39,38 @@ public abstract class Partido {
 
     public void setJuegaLaCasa(boolean juegaLaCasa) {
         this.juegaLaCasa = juegaLaCasa;
+    }
+
+    public Persona getGanador() {
+        return ganador;
+    }
+
+    public void setGanador(Persona ganador) {
+        this.ganador = ganador;
+    }
+
+    public Persona getPerdedor() {
+        return perdedor;
+    }
+
+    public void setPerdedor(Persona perdedor) {
+        this.perdedor = perdedor;
+    }
+
+    public int getCuentasParaLaCasa() {
+        return cuentasParaLaCasa;
+    }
+
+    public void setCuentasParaLaCasa(int cuentasParaLaCasa) {
+        this.cuentasParaLaCasa = cuentasParaLaCasa;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

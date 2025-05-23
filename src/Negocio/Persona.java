@@ -47,6 +47,14 @@ public abstract class Persona {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
     
 }

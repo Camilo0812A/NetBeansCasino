@@ -18,7 +18,7 @@ public class BarajaBlackjack {
 
     public BarajaBlackjack() {
         cartas = new ArrayList<>();
-        String[] valores = {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
+        String[] valores = {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J"};
         String[] palos = {"Corazones", "Diamantes", "Espadas", "Picas"};
 
         // Crear el mazo con todas las cartas posibles

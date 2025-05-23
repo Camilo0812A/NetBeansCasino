@@ -4,6 +4,7 @@
  */
 package Negocio;
 
+import Vista.Ventana;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +16,33 @@ public class Casino {
     private ArrayList<Persona> myPersonas = new ArrayList<>();
     private ArrayList<Partido> myPartidos = new ArrayList<>();
     private Crupier crupierEncargado;
+    int montoCaja=0;
 
     public Casino() {
+    boolean noValido = true;
+    while (noValido) {
+        try {
+            String entrada = Ventana.leerCadena("Ingrese el valor de la caja.");
+            
+            if (entrada == null) {
+                System.exit(0);
+            }
+
+            int valor = Integer.parseInt(entrada);
+
+            if (valor < 1000000) {
+                Ventana.imp("El valor no puede ser menor a 1,000,000", "Sistema");
+            } else {
+                montoCaja = valor;
+                noValido = false;
+            }
+
+        } catch (NumberFormatException e) {
+            Ventana.imp("Ingrese un valor válido", "Sistema");
+        }
     }
+}
+
 
     public ArrayList<Jugador> getJugadores() {
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -82,6 +107,20 @@ public class Casino {
         }
         if (cad.isEmpty()) {
             return "No hay crupiers.";
+        }
+        return cad;
+
+    }
+    
+    public String mostrarJugadores() {
+        String cad = "";
+        for (Persona a : myPersonas) {
+            if (a instanceof Jugador) {
+                cad += ((Jugador) a).mostrarJugador();
+            }
+        }
+        if (cad.isEmpty()) {
+            return "No hay jugadores.";
         }
         return cad;
 
@@ -177,6 +216,10 @@ public class Casino {
     public String mostrarCrupierEncargado() {
         return crupierEncargado.getNombre();
     }
+    
+    public String mostrarCedulaCrupierE(){
+        return crupierEncargado.getCedula();
+    }
 
     public boolean hayCrupierEncargado() {
         if (crupierEncargado == null) {
@@ -212,6 +255,10 @@ public class Casino {
         return cad;
     }
 
+    public String esBlackjack() {
+        return ((PartidoBlackjack) myPartidos.getLast()).validarBlackjack();
+    }
+
     public String pedirCartaBlackjack(String jugador) {
         if (jugador.equalsIgnoreCase("1")) {
             return ((PartidoBlackjack) myPartidos.getLast()).darCartaJ1();
@@ -228,16 +275,25 @@ public class Casino {
         }
         return false;
     }
-    
-    public boolean plantarJugador1(){
-        if(myPartidos.getLast().isJuegaLaCasa()){
-            boolean jugarCrupier=puedeJugarTurnoCrupier();
-            while(jugarCrupier==true){
-                jugarCrupier=puedeJugarTurnoCrupier();
+
+    public boolean plantarJugador1() {
+        if (myPartidos.getLast().isJuegaLaCasa()) {
+            boolean jugarCrupier = puedeJugarTurnoCrupier();
+            while (jugarCrupier == true) {
+                ((PartidoBlackjack) myPartidos.getLast()).darCartaJ2();
+                jugarCrupier = puedeJugarTurnoCrupier();
             }
             return true;
         }
         return false;
+    }
+
+    public String finalizarPartido() {
+        myPartidos.getLast().setEstado("Finalizado");
+        String info = ((PartidoBlackjack) myPartidos.getLast()).finalizarPartido();
+        String[] infor = info.split("/");
+
+        return infor[0];
     }
 
     public ArrayList<Persona> getMyPersonas() {

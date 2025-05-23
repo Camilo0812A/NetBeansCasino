@@ -18,7 +18,7 @@ public class FormCasinoEntrada extends javax.swing.JFrame {
     public FormCasinoEntrada() {
         initComponents();
         myCasino=new Casino();
-        this.myCasino.setCrupierEncargado(new Crupier("Juan", "123", 18, "1"));
+        this.myCasino.setCrupierEncargado(new Crupier("Juan.exe", "123", 18, "1"));
         this.myCasino.getMyPersonas().add(new Jugador("Juan", "1", 18, 50000, "1"));
     }
     public FormCasinoEntrada(Casino myCasino){

@@ -118,6 +118,11 @@ public class FormAdmin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Mostrar Jugadores");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Crupiers:");
 
@@ -310,6 +315,10 @@ public class FormAdmin extends javax.swing.JFrame {
             this.txtCrupierAsignado.setText("Sin crupier asignado.");
         }
     }//GEN-LAST:event_btnDespedirCrupierActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        myCasino.mostrarJugadores();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
